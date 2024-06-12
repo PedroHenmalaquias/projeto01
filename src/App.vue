@@ -43,15 +43,17 @@ const user = reactive({
   biografia: ''
 })
 let envia = ref(false)
-let hobbie = ""
-let linguagem = ref('')
+let hobbie = ref("")
+let linguagem = ref("")
 const addHobbie = () => {
-  user.hobbies.push(hobbie)
-  hobbie = "" 
+  let hobbiee = hobbie.value
+  user.hobbies.push(hobbiee)
+  hobbie.value = "" 
 }
 const addLinguagem = () => {
-  user.linguagens.push(linguagem)
-  linguagem.value = ''
+  let linguagemm = linguagem.value
+  user.linguagens.push(linguagemm)
+  linguagem.value = ""
 }
 </script>
 
@@ -107,17 +109,17 @@ const addLinguagem = () => {
     </form>
   </div>
   <div v-if="envia == true" class="container corDados">
-    <div class="cabecalhoDados"><h1>Seus dados</h1> <button @click="envia = false">X</button></div>
-    <p>Nome: {{ user.nome }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Senha: {{ user.senha }}</p>
-    <p>Confirmar Senha: {{ user.confirmarSenha }}</p>
-    <p>Data de Nascimento: {{ user.dataNascimento }}</p>
-    <p>Endereço: {{ user.endereco }}</p>
-    <p>Cidade: {{ user.cidade }}</p>
-    <p>Estado: {{ user.estado }}</p>
-    <p>Hobbies: <p v-for="hobbiee in user.hobbies" :key="hobbiee">{{ hobbiee }}</p></p>
-    <p>Linguagens: {{ user.linguagens }}</p>
+    <div class="cabecalhoDados"><h2>Seus dados</h2> <button @click="envia = false">X</button></div>
+    <ul><li>Nome: {{ user.nome }}</li>
+    <li>Email: {{ user.email }}</li>
+    <li>Senha: {{ user.senha }}</li>
+    <li>Confirmar Senha: {{ user.confirmarSenha }}</li>
+    <li>Data de Nascimento: {{ user.dataNascimento }}</li>
+    <li>Endereço: {{ user.endereco }}</li>
+    <li>Cidade: {{ user.cidade }}</li>
+    <li>Estado: {{ user.estado }}</li>
+    <li>Hobbies: <p v-for="hobbiee in user.hobbies" :key="hobbiee">{{ hobbiee }}</p></li>
+    <li>Linguagens: <p v-for="i in user.linguagens" :key="i">{{ i }}</p></li></ul>
   </div>
 </template>
 
@@ -174,5 +176,26 @@ form{
 .container h1{
   margin-bottom: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.cabecalhoDados{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1rem auto;
+  background-color: #f9f9f9;
+}
+.cabecalhoDados > h2{
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.cabecalhoDados > button{
+  margin-left: 1rem;
+  width: 5%;
+  background-color: red;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
 }
 </style>
