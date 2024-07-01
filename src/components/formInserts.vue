@@ -9,21 +9,22 @@ const user = reactive({
   dataNascimento: '',
   endereco: '',
   cidade: '',
-  estado: ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'],
+  estado: '',
   hobbies: [],
   linguagens: [],
   biografia: ''
 })
+const estados = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
 let hobbie = ref("")
 let linguagem = ref("")
 const addHobbie = () => {
-  let hobbiee = hobbie.value
-  user.hobbies.push(hobbiee)
+  let hobbieAdd = hobbie.value
+  user.hobbies.push(hobbieAdd)
   hobbie.value = "" 
 }
 const addLinguagem = () => {
-  let linguagemm = linguagem.value
-  user.linguagens.push(linguagemm)
+  let linguagemAdd = linguagem.value
+  user.linguagens.push(linguagemAdd)
   linguagem.value = ""
 }
 const show = ref(false)
@@ -72,25 +73,30 @@ const show = ref(false)
         <button @click="addLinguagem">add</button>
       </div>
       <div class="itens">
-        <label for="stateInput">Estado:</label>
+        <label for="stateInput">Estados:</label>
         <select name="stateInput" id="" v-model="user.estado">
-          <option v-for="{estado} in user.estado" :key="estado" :value="estado">{{ estado }}</option>
+          <option v-for="estado in estados" :key="estado" >{{ estado }}</option>
         </select>
       </div>
-      <div class="itens"><button @click="show = !show">Enviar</button></div>
+      <div class="itens"><button @click="show = true">Enviar</button></div>
     </form>
   </div>
   <div v-if="show" class="container corDados">
-    <div class="cabecalhoDados"><h2>Seus dados</h2> <button @click="envia = false">X</button></div>
-    <ul><li>Nome: {{ user.nome }}</li>
+    <div class="cabecalhoDados">
+      <h2>Seus dados</h2>
+        <button @click="show = false">X</button>
+    </div>
+    <ul>
+    <li>Nome: {{ user.nome }}</li>
     <li>Email: {{ user.email }}</li>
     <li>Senha: {{ user.senha }}</li>
     <li>Confirmar Senha: {{ user.confirmarSenha }}</li>
     <li>Data de Nascimento: {{ user.dataNascimento }}</li>
     <li>Endereço: {{ user.endereco }}</li>
     <li>Cidade: {{ user.cidade }}</li>
-    <li>Estado: {{ user.estado }}</li>
+    <li>Estados: {{ user.estado }}</li>
     <li>Hobbies: <p v-for="hobbiee in user.hobbies" :key="hobbiee">{{ hobbiee }}</p></li>
-    <li>Linguagens: <p v-for="i in user.linguagens" :key="i">{{ i }}</p></li></ul>
+    <li>Linguagens: <p v-for="i in user.linguagens" :key="i">{{ i }}</p></li>
+    </ul>
   </div>
 </template>
